@@ -1,4 +1,4 @@
-name: Build Executables for Windows
+name: Build Windows Executable
 
 on:
   push:
@@ -25,35 +25,12 @@ jobs:
           pip install -r requirements.txt
           pip install pyinstaller
 
-      - name: Build EXE
+      - name: Build Windows Executable
         run: |
           pyinstaller --onefile --noconsole main.py -n image-tool-windows.exe
 
       - name: Upload Windows Artifact
         uses: actions/upload-artifact@v4
         with:
-          name: image-tool-windows
+          name: windows-build
           path: dist/*
-
-  release:
-    name: Publish Release
-    needs: windows_build
-    runs-on: ubuntu-latest
-
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-
-      - name: Download artifacts
-        uses: actions/download-artifact@v4
-        with:
-          path: ./dist
-
-      - name: Create Release
-        uses: softprops/action-gh-release@v1
-        with:
-          tag_name: ${{ github.ref_name }}
-          name: "Release ${{ github.ref_name }}"
-          files: ./dist/**/*
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
