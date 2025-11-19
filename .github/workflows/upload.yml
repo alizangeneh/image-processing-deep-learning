@@ -1,4 +1,4 @@
-name: upload
+name: Upload Executables to Release
 
 on:
   workflow_dispatch:
@@ -33,10 +33,16 @@ jobs:
         name: image-tool-windows
         path: artifacts/windows
 
-    - name: List files
+    - name: List downloaded files
       run: ls -R artifacts
 
-    - name: Upload to Release
+    - name: Upload All Artifacts to Release
       uses: softprops/action-gh-release@v1
       with:
-        tag_name: ${{ github.event.inputs.release_tag
+        tag_name: ${{ github.event.inputs.release_tag }}
+        files: |
+          artifacts/linux/**
+          artifacts/mac/**
+          artifacts/windows/**
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
