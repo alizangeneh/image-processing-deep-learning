@@ -11,7 +11,7 @@ jobs:
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
-        os: [ubuntu-latest, windows-latest, macos-latest]
+        os: [windows-latest, ubuntu-latest, macos-latest]
 
     steps:
       - name: Checkout repository
@@ -29,10 +29,11 @@ jobs:
           pip install pyinstaller
 
       - name: Build executable
+        shell: bash
         run: |
-          if [ "$RUNNER_OS" = "Windows" ]; then
+          if [[ "$RUNNER_OS" == "Windows" ]]; then
             pyinstaller --noconsole --onefile main.py -n image-tool-windows.exe
-          elif [ "$RUNNER_OS" = "macOS" ]; then
+          elif [[ "$RUNNER_OS" == "macOS" ]]; then
             pyinstaller --onefile main.py -n image-tool-mac
           else
             pyinstaller --onefile main.py -n image-tool-linux
@@ -42,7 +43,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: image-tool-${{ matrix.os }}
-          path: dist/
+          path: dist/*
 
   release:
     name: Create Release and Upload Executables
@@ -53,23 +54,10 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Download all artifacts
+      - name: Download artifacts
         uses: actions/download-artifact@v4
         with:
           path: ./dist
 
       - name: Create GitHub Release
-        uses: softprops/action-gh-release@v1
-        with:
-          tag_name: ${{ github.ref_name }}
-          name: "Release ${{ github.ref_name }}"
-          body: |
-            Automatic release created by GitHub Actions.
-            Includes executables for:
-            - Windows (.exe)
-            - Linux (.AppImage or binary)
-            - macOS (.app/.dmg)
-          files: |
-            dist/**/*
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        uses: softprops/action-
