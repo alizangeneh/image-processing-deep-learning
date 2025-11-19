@@ -1,0 +1,48 @@
+name: upload
+
+on:
+  workflow_dispatch:
+    inputs:
+      release_tag:
+        description: "Release tag to upload files to"
+        required: true
+
+jobs:
+  upload:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v4
+
+    - name: Download Linux Artifact
+      uses: actions/download-artifact@v4
+      with:
+        name: linux-build
+        path: artifacts/linux
+
+    - name: Download MacOS Artifact
+      uses: actions/download-artifact@v4
+      with:
+        name: mac-build
+        path: artifacts/mac
+
+    - name: Download Windows Artifact
+      uses: actions/download-artifact@v4
+      with:
+        name: windows-build
+        path: artifacts/windows
+
+    - name: List files
+      run: ls -R artifacts
+
+    - name: Upload to Release
+      uses: softprops/action-gh-release@v1
+      with:
+        tag_name: ${{ github.event.inputs.release_tag }}
+        files: |
+          artifacts/linux/**/*
+          artifacts/mac/**/*
+          artifacts/windows/**/*
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
