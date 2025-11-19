@@ -1,0 +1,110 @@
+# ============================
+# Python
+# ============================
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.pdb
+*.egg-info/
+*.egg
+*.whl
+
+# ============================
+# Virtual Environments
+# ============================
+venv/
+env/
+ENV/
+.virtualenv/
+.venv/
+
+# ============================
+# PyInstaller build outputs
+# ============================
+dist/
+build/
+*.spec
+
+# ============================
+# Executables / Binaries
+# ============================
+*.exe
+*.dll
+*.bin
+*.so
+*.dylib
+*.app
+*.pkg
+*.dmg
+*.run
+
+# ============================
+# Logs & Temp Files
+# ============================
+*.log
+*.tmp
+*.temp
+*.cache
+.cache/
+pip-log.txt
+
+# ============================
+# OS-specific files
+# ============================
+# Windows
+Thumbs.db
+Desktop.ini
+
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Linux
+*~
+
+# ============================
+# Jupyter / Misc
+# ============================
+.ipynb_checkpoints/
+profile_default/
+
+# ============================
+# Image/AI Model files
+# (Do NOT upload big neural network weights)
+# ============================
+*.pth
+*.onnx
+*.ckpt
+*.caffemodel
+*.pb
+*.tflite
+*.h5
+*.weights
+*.pt
+
+# Ignore downloaded model folders
+models/*.pth
+models/*.caffemodel
+models/*.onnx
+models/*.h5
+models/*.weights
+
+# ============================
+# Archive files
+# ============================
+*.zip
+*.rar
+*.7z
+*.tar
+*.tar.gz
+
+# ============================
+# Temporary content
+# ============================
+.tmp/
+temp/
+tests/
+test/
+cache/

@@ -1,0 +1,1 @@
+Model files (pth, caffemodel) must be downloaded from the Release page.
