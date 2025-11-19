@@ -87,3 +87,13 @@ Due to file size limits, model weights must be downloaded manually.
 Author:
 Ali Zangeneh
 GitHub: https://github.com/alizangeneh
+
+### Download Required Model Files
+
+You must download the following model files from the **Release section** of this repository:
+
+- RealESRGAN_x4plus.pth
+- deploy.prototxt
+- res10_300x300_ssd_iter_140000.caffemodel
+
+After downloading, place them inside the **models/** folder.
