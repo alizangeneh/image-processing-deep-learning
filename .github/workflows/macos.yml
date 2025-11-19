@@ -1,0 +1,32 @@
+name: Build MacOS CLI
+
+on:
+  workflow_dispatch:
+
+jobs:
+  macos_build:
+    runs-on: macos-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.10"
+
+      - name: Install dependencies (CLI only)
+        run: |
+          python3 -m pip install --upgrade pip
+          pip3 install numpy pillow opencv-python-headless pyinstaller
+
+      - name: Build Mac binary
+        run: |
+          pyinstaller --onefile main_cli.py -n image-tool-mac
+
+      - name: Upload Mac Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: macos-cli
+          path: dist/*
