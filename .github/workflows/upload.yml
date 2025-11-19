@@ -15,21 +15,18 @@ jobs:
     - name: Checkout
       uses: actions/checkout@v4
 
-    # Linux Artifact (REAL NAME = linux-build)
     - name: Download Linux Artifact
       uses: actions/download-artifact@v4
       with:
-        name: linux-build
+        name: linux-cli
         path: artifacts/linux
 
-    # macOS Artifact (REAL NAME = mac-build)
     - name: Download MacOS Artifact
       uses: actions/download-artifact@v4
       with:
         name: mac-build
         path: artifacts/mac
 
-    # Windows Artifact (REAL NAME = windows-build)
     - name: Download Windows Artifact
       uses: actions/download-artifact@v4
       with:
